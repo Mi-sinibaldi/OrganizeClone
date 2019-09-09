@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1034046590021",
+    "firebase_url": "https://organizeclone-3eed8.firebaseio.com",
+    "project_id": "organizeclone-3eed8",
+    "storage_bucket": "organizeclone-3eed8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034046590021:android:05648187915884bda3e72c",
+        "android_client_info": {
+          "package_name": "com.michelle.organizeclone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034046590021-sffbq8qeorjitrs561g87ijegjpcs43r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.michelle.organizeclone",
+            "certificate_hash": "a47e5ed77ad883b7f22b20e4c7323d7f522a352c"
+          }
+        },
+        {
+          "client_id": "1034046590021-1c7uhj9uk2b5n6sgh078lh3qg6jqbr45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHnnoO-w-8je3gc5ZFs8LmKrhbx0gwMr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034046590021-1c7uhj9uk2b5n6sgh078lh3qg6jqbr45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
