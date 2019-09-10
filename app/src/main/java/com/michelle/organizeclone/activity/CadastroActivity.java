@@ -13,6 +13,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.michelle.organizeclone.R;
 import com.michelle.organizeclone.activity.config.ConfigFirebase;
 import com.michelle.organizeclone.activity.model.Usuario;
@@ -83,11 +86,29 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(CadastroActivity.this,
-                            "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+
+                  finish();
+
                 } else {
+
+                    String exception = "";
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        exception = "Digite um senha forte:" +
+                                "Minimo 8 caracteres e " +
+                                "p  elo menos um caracter especial.";
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        exception = "Digite um e-mail válido!";
+                    } catch (FirebaseAuthUserCollisionException e) {
+                        exception = "Essa conta já foi cadastrada!";
+                    } catch (Exception e) {
+                        exception = "Erro ao cadastrar usuário" + e.getMessage();
+                        e.printStackTrace(); //printa no log
+                    }
+
                     Toast.makeText(CadastroActivity.this,
-                            "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                            exception, Toast.LENGTH_SHORT).show();
                 }
             }
         });

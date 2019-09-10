@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">OrganizeClone</string>
+    <string name="title_activity_princiapl">PrinciaplActivity</string>
+    <string name="title_activity_principal">PrincipalActivity</string>
 </resources>
