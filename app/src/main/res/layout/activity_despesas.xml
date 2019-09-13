@@ -38,7 +38,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:hint="Ex: 19/10/2019"
-        app:layout_constraintBottom_toTopOf="@+id/editSalario"
+        app:layout_constraintBottom_toTopOf="@+id/editCategoria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,10 +57,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSalario" />
+        app:layout_constraintTop_toBottomOf="@+id/editCategoria" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editSalario"
+        android:id="@+id/editCategoria"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -83,5 +83,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_check_white_24dp"
-        android:focusable="true" />
+        android:focusable="true"
+        android:onClick="salvarDespesa"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
