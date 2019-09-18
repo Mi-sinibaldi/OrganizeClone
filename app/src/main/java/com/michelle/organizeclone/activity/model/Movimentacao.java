@@ -2,12 +2,9 @@ package com.michelle.organizeclone.activity.model;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.michelle.organizeclone.activity.config.ConfigFirebase;
 import com.michelle.organizeclone.activity.helper.Base64Custom;
 import com.michelle.organizeclone.activity.helper.DateUtil;
-
-import java.util.Date;
 
 public class Movimentacao {
 

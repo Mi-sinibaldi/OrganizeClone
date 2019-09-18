@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="R$"
+        android:hint="Categoria"
         app:layout_constraintBottom_toTopOf="@+id/editDesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -78,10 +78,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:focusable="true"
+        android:onClick="salvarReceita"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_check_white_24dp"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_check_white_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
