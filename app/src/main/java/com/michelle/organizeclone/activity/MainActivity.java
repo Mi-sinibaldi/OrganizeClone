@@ -8,11 +8,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
 import com.michelle.organizeclone.R;
-import com.michelle.organizeclone.activity.config.ConfigFirebase;
+import com.michelle.organizeclone.activity.config.ConfiguracaoFirebase;
 
 public class MainActivity extends IntroActivity {
 
-    private FirebaseAuth auth;
+    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +53,16 @@ public class MainActivity extends IntroActivity {
         );
     }
 
-    public void btnCadastrar(View view) {
-
-        Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
         verificarUsuarioLogado();
+    }
+
+    public void btnCadastrar(View view) {
+
+        Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
+        startActivity(intent);
     }
 
     public void btnEntrar(View view) {
@@ -70,9 +70,9 @@ public class MainActivity extends IntroActivity {
     }
 
     public void verificarUsuarioLogado() {
-        auth = ConfigFirebase.getAuth();
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         //auth.signOut();
-        if (auth.getCurrentUser() != null) { // recupera o usuário atual
+        if (autenticacao.getCurrentUser() != null) { // recupera o usuário atual
             telaPrincipla();
         }
     }

@@ -1,12 +1,12 @@
 package com.michelle.organizeclone.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.michelle.organizeclone.R;
-import com.michelle.organizeclone.activity.config.ConfigFirebase;
+import com.michelle.organizeclone.activity.config.ConfiguracaoFirebase;
 import com.michelle.organizeclone.activity.helper.Base64Custom;
 import com.michelle.organizeclone.activity.helper.DateUtil;
 import com.michelle.organizeclone.activity.model.Movimentacao;
@@ -26,8 +26,8 @@ public class ReceitasActivity extends AppCompatActivity {
     private TextInputEditText editData, editCategoria, editDesc;
     private EditText editTextValor;
     private Movimentacao movimentacao;
-    private DatabaseReference ref = ConfigFirebase.getFirebase();
-    private FirebaseAuth auth = ConfigFirebase.getAuth();
+    private DatabaseReference referencia = ConfiguracaoFirebase.getFirebaseDatabase();
+    private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     private Double receitaTotal = 0.0;
 
     @Override
@@ -35,10 +35,7 @@ public class ReceitasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receitas);
 
-        editData = findViewById(R.id.editData);
-        editCategoria = findViewById(R.id.editCategoria);
-        editDesc = findViewById(R.id.editDesc);
-        editTextValor = findViewById(R.id.editTextValor);
+        loadUi();
 
         //Data atual
         editData.setText(DateUtil.dataAtual());
@@ -102,9 +99,9 @@ public class ReceitasActivity extends AppCompatActivity {
     }
 
     public void recuperReceitaTotal() {
-        String emailUsuario = auth.getCurrentUser().getEmail();
-        String idUsuario = Base64Custom.codigicarBase64(emailUsuario);
-        DatabaseReference usuarioRef = ref.child("usuarios").child(idUsuario);
+        String emailUsuario = autenticacao.getCurrentUser().getEmail();
+        String idUsuario = Base64Custom.codificarBase64(emailUsuario);
+        DatabaseReference usuarioRef = referencia.child("usuarios").child(idUsuario);
 
         usuarioRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -112,6 +109,7 @@ public class ReceitasActivity extends AppCompatActivity {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class); // converte o retorno do firebase em um objeto do tipo usuário
                 receitaTotal = usuario.getReceitaTotal();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -120,10 +118,17 @@ public class ReceitasActivity extends AppCompatActivity {
     }
 
     public void atualizarReceita(Double receita) {
-        String emailUsuario = auth.getCurrentUser().getEmail();
-        String idUsuario = Base64Custom.codigicarBase64(emailUsuario);
-        DatabaseReference usuarioRef = ref.child("usuarios").child(idUsuario);
+        String emailUsuario = autenticacao.getCurrentUser().getEmail();
+        String idUsuario = Base64Custom.codificarBase64(emailUsuario);
+        DatabaseReference usuarioRef = referencia.child("usuarios").child(idUsuario);
 
         usuarioRef.child("receitaTotal").setValue(receita);
+    }
+
+    public void loadUi() {
+        editData = findViewById(R.id.editData);
+        editCategoria = findViewById(R.id.editCategoria);
+        editDesc = findViewById(R.id.editDesc);
+        editTextValor = findViewById(R.id.editTextValor);
     }
 }

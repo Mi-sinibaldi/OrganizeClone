@@ -2,7 +2,7 @@ package com.michelle.organizeclone.activity.model;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
-import com.michelle.organizeclone.activity.config.ConfigFirebase;
+import com.michelle.organizeclone.activity.config.ConfiguracaoFirebase;
 
 public class Usuario {
     private String nome;
@@ -16,7 +16,7 @@ public class Usuario {
     }
 
     public void salvar() {
-        DatabaseReference firebase = ConfigFirebase.getFirebase();
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDatabase();
         firebase.child("usuarios")
                 .child(this.idUsuario)
                 .setValue(this);

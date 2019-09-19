@@ -1,8 +1,5 @@
 package com.michelle.organizeclone.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,16 +7,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.michelle.organizeclone.R;
-import com.michelle.organizeclone.activity.config.ConfigFirebase;
+import com.michelle.organizeclone.activity.config.ConfiguracaoFirebase;
 import com.michelle.organizeclone.activity.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
@@ -27,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView editTextEmail, editTextSenha;
     private Button buttonLogin;
     private Usuario usuario;
-    private FirebaseAuth auth;
+    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                         usuario = new Usuario();
                         usuario.setSenha(textSenha);
                         usuario.setEmail(textEmail);
+                        validarLogin();
 
                     } else {
                         Toast.makeText(LoginActivity.this,
@@ -72,8 +71,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void validarLogin() {
 
-        auth = ConfigFirebase.getAuth();
-        auth.signInWithEmailAndPassword(
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        autenticacao.signInWithEmailAndPassword(
                 usuario.getEmail(),
                 usuario.getSenha()
         ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

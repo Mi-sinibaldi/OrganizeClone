@@ -2,7 +2,7 @@ package com.michelle.organizeclone.activity.model;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.michelle.organizeclone.activity.config.ConfigFirebase;
+import com.michelle.organizeclone.activity.config.ConfiguracaoFirebase;
 import com.michelle.organizeclone.activity.helper.Base64Custom;
 import com.michelle.organizeclone.activity.helper.DateUtil;
 
@@ -13,21 +13,30 @@ public class Movimentacao {
     private String desc;
     private String tipo;
     private double valor;
+    private String key;
 
     public Movimentacao() {
     }
 
     public void salvar(String dataEscolhida) {
-        FirebaseAuth autenticacao = ConfigFirebase.getAuth();
-        String idUsuario = Base64Custom.codigicarBase64(autenticacao.getCurrentUser().getEmail());
-        String mesAno = DateUtil.mesAnoDataEscolhida(dataEscolhida);
+        FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        String idUsuario = Base64Custom.codificarBase64( autenticacao.getCurrentUser().getEmail() );
+        String mesAno = DateUtil.mesAnoDataEscolhida( dataEscolhida );
 
-        DatabaseReference reference = ConfigFirebase.getFirebase();
+        DatabaseReference reference = ConfiguracaoFirebase.getFirebaseDatabase();
         reference.child("movimentacao")
-                .child(idUsuario)
-                .child(mesAno)
+                .child( idUsuario )
+                .child( mesAno )
                 .push()
                 .setValue(this);
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getData() {

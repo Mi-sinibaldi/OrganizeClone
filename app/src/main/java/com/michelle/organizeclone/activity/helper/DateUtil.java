@@ -7,7 +7,7 @@ public class DateUtil {
     //data customizado
     public static String dataAtual() {
         long date = System.currentTimeMillis();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataSring = simpleDateFormat.format(date);
         return dataSring;
     }

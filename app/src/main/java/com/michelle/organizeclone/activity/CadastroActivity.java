@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.michelle.organizeclone.R;
-import com.michelle.organizeclone.activity.config.ConfigFirebase;
+import com.michelle.organizeclone.activity.config.ConfiguracaoFirebase;
 import com.michelle.organizeclone.activity.helper.Base64Custom;
 import com.michelle.organizeclone.activity.model.Usuario;
 
@@ -25,7 +25,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     private TextView editTexteNome, editTextEmail, editTexSenha;
     private Button buttonNovoCadastro;
-    private FirebaseAuth auth;
+    private FirebaseAuth autenticacao;
     private Usuario usuario;
 
     @Override
@@ -80,15 +80,15 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void cadastrarUsuario() {
 
-        auth = ConfigFirebase.getAuth();
-        auth.createUserWithEmailAndPassword(
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        autenticacao.createUserWithEmailAndPassword(
                 usuario.getEmail(), usuario.getSenha()
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
-                    String idUsuario = Base64Custom.codigicarBase64(usuario.getEmail());
+                    String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
                     usuario.setIdUsuario(idUsuario);
                     usuario.salvar();
                     finish();
